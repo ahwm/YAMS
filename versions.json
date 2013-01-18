@@ -16,8 +16,9 @@
       "biomeextractor": "090",
       "tectonicus":"1.38"
     },
-	"pre": "http://assets.minecraft.net/1_4/minecraft_server.jar",
-	"pre-client": "http://assets.minecraft.net/1_4/minecraft.jar",
+	"pre": "http://assets.minecraft.net/13w03a/minecraft_server.jar",
+	"pre-client": "http://assets.minecraft.net/13w03a/minecraft.jar",
 	"bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
+	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
 	"tekkit": "http://mirror.technicpack.net/files/Tekkit_Server_3.1.2.zip"
 }
