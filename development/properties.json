@@ -63,12 +63,26 @@
       "min": "3",
       "max": "15",
 	  "name":"View Distance" },
+	  
+	{ "key":"spawn-protection",
+	  "type":"integer",
+	  "default":"16",
+	  "description":"Determines the radius of the spawn protection.",
+      "min": "0",
+      "max": "999",
+	  "name":"Spawn Protection" },	  
       
     { "key":"level-seed",
       "type": "string",
       "default": "",
       "description":"The seed determines the way your world looks",
       "name":"World Seed" },
+
+    { "key":"generator-settings",
+      "type":"string",
+      "default":"",
+      "description":"The settings used to customize Superflat world generation.",
+      "name":"Generator Settings" },
       
     { "key":"gamemode",
       "type":"array",
@@ -81,13 +95,13 @@
       "type":"array",
       "values": "0|Peaceful,1|Easy,2|Normal,3|Hard",
       "default": "1",
-      "description":"Difficulty of game, damage and huger effects",
+      "description":"Difficulty of game, damage and hunger effects",
       "name":"Difficulty" },
 	  
     { "key":"hardcore",
       "type":"boolean",
       "default":"true",
-      "description":"f set to true, players will be permanently banned if they die",
+      "description":"If set to true, players will be permanently banned if they die",
       "name":"Hardcore mode" },
       
     { "key":"motd",
@@ -102,6 +116,12 @@
       "description":"Whether to generate structures such as villages",
       "name":"Generate Structures" },
 
+    { "key":"enable-command-block",
+      "type":"boolean",
+      "default":"false",
+      "description":"Enables command blocks in game",
+      "name":"Enable Command Blocks" },	  
+	  
     { "key":"level-type",
       "type":"array",
       "values": "DEFAULT|Normal,FLAT|Flat,LARGEBIOMES|Large Biomes",
