@@ -19,11 +19,14 @@ namespace YAMS
 
         private static bool stoppingServer = false;
 
+        public static bool Running = false;
+
         public static void Init()
         {
             tcpListener = new TcpListener(IPAddress.Any, Convert.ToInt32(Database.GetSetting("TelnetPort", "YAMS")));
             listenThread = new Thread(new ThreadStart(ListenForClients));
             listenThread.Start();
+            Running = true;
         }
         
         private static void ListenForClients()
@@ -54,6 +57,12 @@ namespace YAMS
 
         public static void Stop()
         {
+            //Kill all the clients
+            foreach (TelnetClient client in lstClients)
+            {
+                client.Stop();
+            }
+            
             stoppingServer = true;
             listenThread.Abort();
             tcpListener.Stop();
@@ -68,7 +77,7 @@ namespace YAMS
                 Networking.CloseUPnP(Convert.ToInt32(YAMS.Database.GetSetting("TelnetPort", "YAMS")));
             }
 
-
+            Running = false;
         }
 
         public static void SendMessage(string strMessage, int intServerID = 0)

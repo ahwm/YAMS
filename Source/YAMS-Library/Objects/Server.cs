@@ -346,7 +346,7 @@ namespace YAMS
             if (e.Data != null && e.Data != ">")
             {
                 YAMS.Database.AddLog(DateTime.Now, e.Data, "server", "out", false, this.ServerID);
-                if (Database.GetSetting("EnableTelnet", "YAMS") == "true") TelnetServer.SendMessage(e.Data, this.ServerID);
+                if (TelnetServer.Running) TelnetServer.SendMessage(e.Data, this.ServerID);
             }
         }
         private void ServerError(object sender, DataReceivedEventArgs e)

@@ -118,12 +118,7 @@ namespace YAMS
                 kvp.Value.Stop();
             }
             YAMS.Database.AddLog("Shutting Down");
-
-            foreach (TelnetClient client in TelnetServer.lstClients)
-            {
-                client.Stop();
-            }
-            TelnetServer.Stop();
+            if (TelnetServer.Running) TelnetServer.Stop();
         }
 
     }
