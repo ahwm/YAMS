@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data.SqlServerCe;
-using System.Threading;
-using System.IO;
 using System.Diagnostics;
-using YAMS;
+using System.IO;
+using System.Threading;
 
 namespace YAMS
 {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YAMS;
-using LibNbt;
+﻿using LibNbt;
 
-namespace YAMS.Objects
+namespace YAMS
 {
 
     public class Player

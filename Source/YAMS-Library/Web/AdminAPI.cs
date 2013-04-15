@@ -1,23 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Diagnostics;
 using HttpServer;
-using HttpServer.Authentication;
 using HttpServer.Headers;
 using HttpServer.Modules;
-using HttpServer.Resources;
-using HttpServer.Tools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Data.SqlServerCe;
 using HttpListener = HttpServer.HttpListener;
-using YAMS;
 
 namespace YAMS.Web
 {

@@ -1,8 +1,8 @@
 ﻿// Retrieved from http://bytes.com/topic/net/insights/797169-reading-parsing-ini-file-c and modified to suit
 
 using System;
-using System.IO;
 using System.Collections;
+using System.IO;
 
 public class IniParser
 {
