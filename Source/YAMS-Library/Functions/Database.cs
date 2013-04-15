@@ -218,6 +218,7 @@ namespace YAMS
         public static string GetSetting(string strSettingName, string strType, int intServerID = 0)
         {
             String strTableName = "";
+            String strServerIDQuery = "";
 
             switch (strType)
             {
@@ -226,13 +227,15 @@ namespace YAMS
                     break;
                 case "MC":
                     strTableName = "MCSettings";
+                    if (intServerID != 0) strServerIDQuery = " and ServerID = @id";
                     break;
             }
 
             try
             {
-                SqlCeCommand cmd = new SqlCeCommand("SELECT SettingValue FROM " + strTableName + " WHERE SettingName = @name", connLocal);
+                SqlCeCommand cmd = new SqlCeCommand("SELECT SettingValue FROM " + strTableName + " WHERE SettingName = @name" + strServerIDQuery, connLocal);
                 cmd.Parameters.Add("@name", strSettingName);
+                if (intServerID != 0) cmd.Parameters.Add("@id", intServerID);
                 string strSettingValue = (string)cmd.ExecuteScalar();
                 return strSettingValue;
             }
