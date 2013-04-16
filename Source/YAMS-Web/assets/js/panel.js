@@ -160,7 +160,7 @@ YAMS.panel = {
         },
         {
             "Give": function () {
-                YAMS.admin.sendCommand('xp ' + $('#playername').val() + ' ' + $('#give-amount').val());
+                YAMS.admin.sendCommand('xp ' + $('#give-amount').val() + ' ' + $('#playername').val());
                 YAMS.panel.dialogs.xp.remove();
             }
         });
