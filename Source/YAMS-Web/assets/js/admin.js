@@ -334,10 +334,13 @@ YAMS.admin = {
                             YAMS.admin.sendCommand('ban-ip ' + $(el).attr('player'));
                             break;
                         case "survival":
-                            YAMS.admin.sendCommand('gamemode ' + $(el).attr('player') + ' 0');
+                            YAMS.admin.sendCommand('gamemode 0 ' + $(el).attr('player'));
                             break;
                         case "creative":
-                            YAMS.admin.sendCommand('gamemode ' + $(el).attr('player') + ' 1');
+                            YAMS.admin.sendCommand('gamemode 1 ' + $(el).attr('player'));
+                            break;
+                        case "adventure":
+                            YAMS.admin.sendCommand('gamemode 2 ' + $(el).attr('player'));
                             break;
                         case "whisper":
                             YAMS.panel.whisperPanel($(el).attr('player'));
