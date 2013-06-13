@@ -81,6 +81,19 @@ YAMS.menu = {
             }
         },
         {
+            text: "Help",
+            submenu : {
+                id: "helpmenu",
+                itemdata: [
+                    [
+                        { text: "Documentation", url: "https://github.com/richardbenson/YAMS/wiki", target: "_blank" },
+                        { text: "Support", url: "http://yams.in/qa/", target: "_blank" },
+                        { text: "Ideas &amp; Feedback", url: "https://yams.uservoice.com/", target: "_blank" }
+                    ]
+                ]
+            }
+        }
+        {
             text: "Log Out",
             onclick: { fn: logOut }
         }
