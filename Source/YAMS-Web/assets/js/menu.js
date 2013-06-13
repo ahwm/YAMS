@@ -92,7 +92,7 @@ YAMS.menu = {
                     ]
                 ]
             }
-        }
+        },
         {
             text: "Log Out",
             onclick: { fn: logOut }
