@@ -11,7 +11,7 @@
     },
   "apps":
     {
-      "overviewer" : "0.10.0-8",
+      "overviewer" : "0.10.0-8-gdd6538b",
       "c10t" : "1.9",
       "biomeextractor": "090",
       "tectonicus":"1.38"
@@ -19,6 +19,5 @@
   "pre": "http://s3.amazonaws.com/Minecraft.Download/versions/13w21a/minecraft_server.13w21a.jar",
   "pre-client": "http://mojang.com/2013/05/snapshot-13w21a/",
 	"bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
-	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
-	"tekkit": "http://mirror.technicpack.net/files/Tekkit_Server_3.1.2.zip"
+	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar"
 }
