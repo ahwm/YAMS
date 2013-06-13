@@ -46,8 +46,8 @@ namespace YAMS
         //Third party URLS
         public static Dictionary<string, string> dicAddOnURLS = new Dictionary<string, string>
         {
-            { "overviewer-x86", "http://overviewer.org/builds/win86_32-vxxx-gdd6538b.zip" },
-            { "overviewer-x64", "http://overviewer.org/builds/win86_64-vxxx-gdd6538b.zip" }
+            { "overviewer-x86", "http://overviewer.org/builds/win86_32-vxxx.zip" },
+            { "overviewer-x64", "http://overviewer.org/builds/win86_64-vxxx.zip" }
         };
 
         //Default versions
