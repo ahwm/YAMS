@@ -105,7 +105,7 @@ namespace YAMS.Web
                     if (s.Players.Count > 0)
                     {
                         strPlayers = "<ul>";
-                        foreach (KeyValuePair<string, Objects.Player> kvp in s.Players)
+                        foreach (KeyValuePair<string, Player> kvp in s.Players)
                         {
                             Vector playerPos = kvp.Value.Position;
                             strPlayers += "<li>";
@@ -161,7 +161,7 @@ namespace YAMS.Web
                             strResponse = "{\"players\" : [";
                             if (s.Players.Count > 0)
                             {
-                                foreach (KeyValuePair<string, Objects.Player> kvp in s.Players)
+                                foreach (KeyValuePair<string, Player> kvp in s.Players)
                                 {
                                     Vector playerPos = kvp.Value.Position;
                                     strResponse += " { \"name\": \"" + kvp.Value.Username + "\", " +

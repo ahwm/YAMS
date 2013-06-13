@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Timers;
-using YAMS.Objects;
 
 namespace YAMS
 {
@@ -437,7 +436,7 @@ namespace YAMS
                 intCounter++;
                 strSafeName = strName + "-" + intCounter.ToString();
             }
-            this.Players.Add(strSafeName, new Objects.Player(strName, this));
+            this.Players.Add(strSafeName, new Player(strName, this));
             this.HasChanged = true;
         }
         private void PlayerLogout(string strName)

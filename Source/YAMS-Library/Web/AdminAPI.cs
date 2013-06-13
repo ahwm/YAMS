@@ -70,7 +70,7 @@ namespace YAMS.Web
                                             "\"players\" : [";
                             if (s.Players.Count > 0)
                             {
-                                foreach (KeyValuePair<string, Objects.Player> kvp in s.Players)
+                                foreach (KeyValuePair<string, Player> kvp in s.Players)
                                 {
                                     Vector playerPos = kvp.Value.Position;
                                     strResponse += " { \"name\": \"" + kvp.Value.Username + "\", " +
