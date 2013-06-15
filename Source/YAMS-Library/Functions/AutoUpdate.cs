@@ -30,6 +30,8 @@ namespace YAMS
         public static bool bolTectonicusUpdateAvailable = false;
         public static bool bolRestartNeeded = false;
         public static bool bolBukkitUpdateAvailable = false;
+        public static bool bolBukkitBetaUpdateAvailable = false;
+        public static bool bolBukkitDevUpdateAvailable = false;
         public static bool bolLibUpdateAvailable = false;
 
         //Minecraft URLs
@@ -69,6 +71,8 @@ namespace YAMS
                 JObject jVers = JObject.Parse(json);
 
                 string strBukkitServerURL = (string)jVers["bukkit"];
+                string strBukkitBetaServerURL = (string)jVers["bukkit-beta"];
+                string strBukkitDevServerURL = (string)jVers["bukkit-dev"];
 
                 //Reset all the JAR etags so we re-download them
                 if (bolForce)
@@ -91,6 +95,14 @@ namespace YAMS
                 if (Convert.ToBoolean(Database.GetSetting("BukkitInstalled", "YAMS")))
                 {
                     bolBukkitUpdateAvailable = UpdateIfNeeded(strBukkitServerURL, Core.RootFolder + @"\lib\craftbukkit.jar.UPDATE", "modified");
+                }
+                if (Convert.ToBoolean(Database.GetSetting("BukkitBetaInstalled", "YAMS")))
+                {
+                    bolBukkitBetaUpdateAvailable = UpdateIfNeeded(strBukkitBetaServerURL, Core.RootFolder + @"\lib\craftbukkit-beta.jar.UPDATE", "modified");
+                }
+                if (Convert.ToBoolean(Database.GetSetting("BukkitDevInstalled", "YAMS")))
+                {
+                    bolBukkitDevUpdateAvailable = UpdateIfNeeded(strBukkitDevServerURL, Core.RootFolder + @"\lib\craftbukkit-dev.jar.UPDATE", "modified");
                 }
 
                 //Now update self
@@ -155,7 +167,8 @@ namespace YAMS
                 {
                     foreach (KeyValuePair<int, MCServer> kvp in Core.Servers)
                     {
-                        if (((kvp.Value.ServerType == "vanilla" && bolServerUpdateAvailable) || (kvp.Value.ServerType == "bukkit" && bolBukkitUpdateAvailable)))
+                        if (((kvp.Value.ServerType == "vanilla" && bolServerUpdateAvailable) || (kvp.Value.ServerType == "bukkit" && bolBukkitUpdateAvailable)
+                            || (kvp.Value.ServerType == "bukkit-beta" && bolBukkitBetaUpdateAvailable) || (kvp.Value.ServerType == "bukkit-dev" && bolBukkitDevUpdateAvailable)))
                         {
                             kvp.Value.RestartIfEmpty();
                         }

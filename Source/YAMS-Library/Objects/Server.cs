@@ -137,6 +137,12 @@ namespace YAMS
                 case "bukkit":
                     strFile = "craftbukkit.jar";
                     break;
+                case "bukkit-beta":
+                    strFile = "craftbukkit-beta.jar";
+                    break;
+                case "bukkit-dev":
+                    strFile = "craftbukkit-dev.jar";
+                    break;
                 case "pre":
                     strFile = "minecraft_server_pre.jar";
                     break;
@@ -178,7 +184,7 @@ namespace YAMS
                     }
 
                     //Some specials for bukkit
-                    if (this.ServerType == "bukkit")
+                    if (this.ServerType == "bukkit" || this.ServerType == "bukkit-beta" || this.ServerType == "bukkit-dev")
                     {
                         strArgs += " -Djline.terminal=jline.UnsupportedTerminal";
                     }

@@ -321,6 +321,8 @@ namespace YAMS.Web
                         case "installed-apps":
                             Dictionary<string, string> dicApps = new Dictionary<string, string> {
                                 { "bukkit" , Database.GetSetting("BukkitInstalled", "YAMS") },
+                                { "bukkitBeta" , Database.GetSetting("BukkitBetaInstalled", "YAMS") },
+                                { "bukkitDev" , Database.GetSetting("BukkitDevInstalled", "YAMS") },
                                 { "overviewer" , Database.GetSetting("OverviewerInstalled", "YAMS") },
                                 { "c10t" , Database.GetSetting("C10tInstalled", "YAMS") },
                                 { "biomeextractor" , Database.GetSetting("BiomeExtractorInstalled", "YAMS") },
@@ -334,6 +336,8 @@ namespace YAMS.Web
                             Database.SaveSetting("C10tInstalled", param["c10t"]);
                             Database.SaveSetting("BiomeExtractorInstalled", param["biomeextractor"]);
                             Database.SaveSetting("BukkitInstalled", param["bukkit"]);
+                            Database.SaveSetting("BukkitBetaInstalled", param["bukkitBeta"]);
+                            Database.SaveSetting("BukkitDevInstalled", param["bukkitDev"]);
                             strResponse = "done";
                             break;
                         case "force-autoupdate":

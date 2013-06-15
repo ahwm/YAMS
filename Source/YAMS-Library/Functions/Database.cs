@@ -416,6 +416,10 @@ namespace YAMS
                     Database.SaveSetting("DBSchema", "7");
                     goto case 7;
                 case 7:
+                    Database.SaveSetting("BukkitBetaInstalled", "false");
+                    Database.SaveSetting("BukkitDevInstalled", "false");
+                    goto case 8;
+                case 8:
                     break;
                 default:
                     break;
