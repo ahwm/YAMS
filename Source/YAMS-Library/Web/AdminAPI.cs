@@ -284,6 +284,30 @@ namespace YAMS.Web
                                 thisServer.SaveProperty((string)option["key"], param[(string)option["key"]]);
                             }
 
+                            //If they've selected a Bukkit but not chosen to have them installed, do it for them
+                            if (param["type"] == "bukkit")
+                            {
+                                if (Database.GetSetting("BukkitInstalled", "YAMS") == "false")
+                                {
+                                    Database.SaveSetting("BukkitInstalled", "true");
+                                    AutoUpdate.CheckUpdates();
+                                }
+                            } else if (param["type"] == "bukkit-beta")
+                            {
+                                if (Database.GetSetting("BukkitBetaInstalled", "YAMS") == "false")
+                                {
+                                    Database.SaveSetting("BukkitBetaInstalled", "true");
+                                    AutoUpdate.CheckUpdates();
+                                }
+                            } else if(param["type"] == "bukkit-dev")
+                            {
+                                if (Database.GetSetting("BukkitDevInstalled", "YAMS") == "false")
+                                {
+                                    Database.SaveSetting("BukkitDevInstalled", "true");
+                                    AutoUpdate.CheckUpdates();
+                                }
+                            }
+
                             if (thisServer.Running) thisServer.RestartIfEmpty();
 
                             break;
