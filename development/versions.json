@@ -19,5 +19,6 @@
   "pre": "http://s3.amazonaws.com/Minecraft.Download/versions/13w21a/minecraft_server.13w21a.jar",
   "pre-client": "http://mojang.com/2013/05/snapshot-13w21a/",
 	"bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
-	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar"
+	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
+  "bukkit-dev": "http://dl.bukkit.org/latest-dev/craftbukkit-dev.jar"
 }
