@@ -8,6 +8,7 @@
     <option value="restartwhenfree">Restart when free</option>
     <option value="clearlogs">Clear old database logs</option>
     <option value="clearbackups">Clear old backups</option>
+    <option value="command">Issue Command</option>
 </select>
 <fieldset>
     <div id="job-time">
@@ -155,4 +156,7 @@
         </select></div>
         <div><label for="clearbackups-amount">Amount</label><input type="text" id="clearbackups-amount" /></div>
     </div>
- </fieldset>
+    <div id="job-command" style="display: none;">
+        <div><label for="commands-command">Command to issue</label><input type="text" id="commands-command" /></div>
+    </div>
+</fieldset>

@@ -99,6 +99,10 @@ namespace YAMS
                         case "clearbackups":
                             Backup.ClearBackups(Core.Servers[Convert.ToInt32(rdJobs["JobServer"])], jobParams["period"], Convert.ToInt32(jobParams["amount"]));
                             break;
+                        case "command":
+                            s = Core.Servers[Convert.ToInt32(rdJobs["JobServer"])];
+                            s.Send(jobParams["command"]);
+                            break;
                         default:
                             Database.AddLog("Invalid entry in Job database", "job", "warn");
                             break;

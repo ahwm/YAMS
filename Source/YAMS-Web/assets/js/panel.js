@@ -258,7 +258,7 @@ YAMS.panel = {
     },
 
     selectType: function (strType) {
-        $('#job-server, #job-update, #job-backup, #job-overviewer, #job-c10t, #job-delayedrestart, #job-restartwhenfree, #job-clearlogs, #job-clearbackups').hide();
+        $('#job-server, #job-update, #job-backup, #job-overviewer, #job-c10t, #job-delayedrestart, #job-restartwhenfree, #job-clearlogs, #job-clearbackups, #job-command').hide();
         if (strType != "update" && strType != "clearlogs") $('#job-server').show();
         if (strType != "") $('#job-' + strType).show();
     },
@@ -353,6 +353,10 @@ YAMS.panel = {
             case "clearbackups":
                 strData += "&job-server=" + $('#server-select').val();
                 strData += "&job-params=" + escape("period=" + $('#clearbackups-period').val() + "&amount=" + $('#clearbackups-amount').val());
+                break;
+            case "command":
+                strData += "&job-server=" + $('#server-select').val();
+                strData += "&job-params=" + escape("command=" + $('#commands-command').val());
                 break;
         }
         $.ajax({
