@@ -20,7 +20,7 @@ namespace YAMS
         private Regex regRemoveTimeStamp = new Regex(@"^([0-9]+:[0-9]+:[0-9]+ )");
         private Regex regErrorLevel = new Regex(@"^\[([A-Z]+)\]{1}");
         private Regex regPlayerChat = new Regex(@"^(\<([\w-~])+\>){1}");
-        private Regex regConsoleChat = new Regex(@"^(\[CONSOLE\]){1}");
+        private Regex regConsoleChat = new Regex(@"^(\[CONSOLE\]|\[Server\]|\<\*Console\>){1}");
         private Regex regPlayerPM = new Regex(@"^(\[([\w])+\-\>(\w)+\]){1}");
         private Regex regPlayerLoggedIn = new Regex(@"^([\w]+)(?:\s*)(?:\[\/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\:[0-9]+\] logged in with entity id)");
         private Regex regPlayerLoggedOut = new Regex(@"^([\w]+) ?(lost connection)");
