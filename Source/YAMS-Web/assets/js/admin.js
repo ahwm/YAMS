@@ -290,6 +290,7 @@ YAMS.admin = {
                     $('#restart-server-when-free').button("enable");
                     $('#toggle-downfall').button("enable");
                     $('#set-time').button("enable");
+                    $('#force-stop').button("enable");
                 } else {
                     $('#start-server').button("enable");
                     $('#stop-server').button("disable");
@@ -298,6 +299,7 @@ YAMS.admin = {
                     $('#restart-server-when-free').button("disable");
                     $('#toggle-downfall').button("disable");
                     $('#set-time').button("disable");
+                    $('#force-stop').button("disable");
                 }
 
                 //Update the player info
@@ -387,9 +389,14 @@ YAMS.admin = {
             data: 'action=stop&serverid=' + YAMS.admin.selectedServer
         });
     },
-    restartServer: function () {
+    stopServer: function () {
         $.ajax({
-            data: 'action=restart&serverid=' + YAMS.admin.selectedServer
+            data: 'action=stop&serverid=' + YAMS.admin.selectedServer
+        });
+    },
+    forceStop: function () {
+        $.ajax({
+            data: 'action=forcestop&serverid=' + YAMS.admin.selectedServer
         });
     },
     delayedRestartServer: function () {

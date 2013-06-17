@@ -50,7 +50,9 @@ YAMS.layout = {
             .append('<br />')
             .append($('<button id="set-time">Set Time</button>').button().click(function () { YAMS.panel.setTime(); return false; }))
             .append('<br />')
-            .append($('<button id="backup-now">Backup Now</button>').button().click(function () { YAMS.panel.backupNow(); return false; }));
+            .append($('<button id="backup-now">Backup Now</button>').button().click(function () { YAMS.panel.backupNow(); return false; }))
+            .append('<br />')
+            .append($('<button id="force-stop">Force Stop</button>').button().click(function () { if (confirm("Force stopping may lose changes to your world or corrupt it, are you sure?")) YAMS.admin.forceStop(); return false; }));
 
         $('#server-accordion').accordion({
             fillSpace: true,

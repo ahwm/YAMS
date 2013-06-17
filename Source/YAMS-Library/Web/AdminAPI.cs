@@ -140,6 +140,11 @@ namespace YAMS.Web
                             Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].Stop();
                             strResponse = "{ \"result\" : \"sent\" }";
                             break;
+                        case "forcestop":
+                            //Force stops a server
+                            Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].ForceStop();
+                            strResponse = "{ \"result\" : \"sent\" }";
+                            break;
                         case "restart":
                             //Restarts a server
                             Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].Restart();

@@ -247,6 +247,18 @@ namespace YAMS
             this.Running = false;
         }
 
+        public void ForceStop()
+        {
+            if (!Running) return;
+
+            this.SafeStop = true;
+            this.prcMinecraft.Kill();
+            this.prcMinecraft.CancelErrorRead();
+            this.prcMinecraft.CancelOutputRead();
+            Database.AddLog("Server Force Stopped", "server", "info", false, this.ServerID);
+            this.Running = false;
+        }
+
         public void Restart()
         {
             if (this.Running)
