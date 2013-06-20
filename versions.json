@@ -16,7 +16,7 @@
       "biomeextractor": "090",
       "tectonicus":"1.38"
     },
-  "pre": "https://s3.amazonaws.com/Minecraft.Download/versions/13w24b/minecraft_server.13w24b.jar",
+  "pre": "https://s3.amazonaws.com/Minecraft.Download/versions/13w25c/minecraft_server.13w25c.jar",
   "pre-client": "https://s3.amazonaws.com/Minecraft.Download/launcher/MinecraftDev.exe",
 	"bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
 	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
