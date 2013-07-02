@@ -35,6 +35,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "YAMS-Web", "YAMS-Web\", "{3
 		StartServerOnDebug = "false"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YAMS-Remover", "YAMS-Remover\YAMS-Remover.csproj", "{C8FE0BBF-B52B-4728-A099-A69024BC3442}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,13 +137,28 @@ Global
 		{3B93DE75-7758-4AE8-B940-BE72BC782A5C}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{3B93DE75-7758-4AE8-B940-BE72BC782A5C}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{3B93DE75-7758-4AE8-B940-BE72BC782A5C}.Release|x86.ActiveCfg = Debug|Any CPU
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Debug|x86.ActiveCfg = Debug|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Debug|x86.Build.0 = Debug|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release 2.0|Any CPU.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release 2.0|Mixed Platforms.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release 2.0|Mixed Platforms.Build.0 = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release 2.0|x86.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release 2.0|x86.Build.0 = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release|Any CPU.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release|Mixed Platforms.Build.0 = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release|x86.ActiveCfg = Release|x86
+		{C8FE0BBF-B52B-4728-A099-A69024BC3442}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_BuildVersioningStyle = None.None.None.None
-		BuildVersion_UpdateFileVersion = False
 		BuildVersion_UpdateAssemblyVersion = False
+		BuildVersion_UpdateFileVersion = False
+		BuildVersion_BuildVersioningStyle = None.None.None.None
 	EndGlobalSection
 EndGlobal
