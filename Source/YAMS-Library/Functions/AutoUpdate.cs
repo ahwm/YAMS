@@ -37,6 +37,7 @@ namespace YAMS
         //Minecraft URLs
         public static string strMCServerURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft_server.jar?";
         public static string strMCClientURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar";
+        public static string strMCVersionFile = "https://s3.amazonaws.com/Minecraft.Download/versions/versions.json";
 
         //YAMS URLs
         public static Dictionary<string, string> strYAMSUpdatePath = new Dictionary<string, string>()
@@ -86,9 +87,16 @@ namespace YAMS
                 //Check Minecraft server first
                 if (bolUpdateJAR || bolManual)
                 {
-                    bolServerUpdateAvailable = UpdateIfNeeded(strMCServerURL, YAMS.Core.RootFolder + @"\lib\minecraft_server.jar.UPDATE");
+                    UpdateIfNeeded(strMCVersionFile, YAMS.Core.RootFolder + @"\lib\mojang-versions.json");
+                    string jsonMojang = File.ReadAllText(YAMS.Core.RootFolder + @"\lib\mojang-versions.json");
+                    JObject mojangVers = JObject.Parse(jsonMojang);
+                    string releaseVer = (string)mojangVers["latest"]["release"];
+                    string snapshotVer = (string)mojangVers["latest"]["snapshot"];
+
+                    bolServerUpdateAvailable = UpdateIfNeeded("https://s3.amazonaws.com/Minecraft.Download/versions/" + releaseVer + "/minecraft_server." + releaseVer + ".jar", YAMS.Core.RootFolder + @"\lib\minecraft_server.jar.UPDATE");
+                    bolPreUpdateAvailable = UpdateIfNeeded("https://s3.amazonaws.com/Minecraft.Download/versions/" + snapshotVer + "/minecraft_server." + snapshotVer + ".jar", YAMS.Core.RootFolder + @"\lib\minecraft_server_pre.jar.UPDATE");
+
                     UpdateIfNeeded(strYPath + @"/properties.json", YAMS.Core.RootFolder + @"\lib\properties.json");
-                    bolPreUpdateAvailable = UpdateIfNeeded((string)jVers["pre"], YAMS.Core.RootFolder + @"\lib\minecraft_server_pre.jar.UPDATE");
                 }
 
                 //Have they opted for bukkit? If so, update that too
