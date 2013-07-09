@@ -169,9 +169,6 @@ namespace YAMS
         //Initial Set-up for first run only
         public static void FirstRun()
         {
-            //Grab latest server jar
-            YAMS.AutoUpdate.UpdateIfNeeded(YAMS.AutoUpdate.strMCServerURL, YAMS.Core.RootFolder + @"\lib\minecraft_server.jar.UPDATE");
-
             //Set our MC Defaults in the DB
             var NewServer = new List<KeyValuePair<string, string>>();
             NewServer.Add(new KeyValuePair<string, string>("admin-slot", "true"));
@@ -434,6 +431,32 @@ namespace YAMS
                 return text;
             else
                 return text.Substring(0, length);
+        }
+
+        //Fetch a text file from the web
+        public static string GetTextHTTP(string strURL)
+        {
+            // create a new instance of WebClient
+            WebClient client = new WebClient();
+
+            try
+            {
+                // actually execute the GET request
+                string ret = client.DownloadString(strURL);
+                return ret;
+            }
+            catch (WebException we)
+            {
+                // WebException.Status holds useful information
+                Database.AddLog(we.Message + ": " + we.Status.ToString());
+                return null;
+            }
+            catch (NotSupportedException ne)
+            {
+                // other errors
+                Database.AddLog(ne.Message);
+                return null;
+            }
         }
     }
 }

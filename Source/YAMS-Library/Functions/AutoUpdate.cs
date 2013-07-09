@@ -35,7 +35,6 @@ namespace YAMS
         public static bool bolLibUpdateAvailable = false;
 
         //Minecraft URLs
-        public static string strMCServerURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft_server.jar?";
         public static string strMCClientURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar";
         public static string strMCVersionFile = "https://s3.amazonaws.com/Minecraft.Download/versions/versions.json";
 
@@ -45,16 +44,6 @@ namespace YAMS
             { "live", "https://github.com/richardbenson/YAMS/raw/updater"},
             { "dev", "https://github.com/richardbenson/YAMS/raw/updater/development" }
         };
-
-        //Third party URLS
-        public static Dictionary<string, string> dicAddOnURLS = new Dictionary<string, string>
-        {
-            { "overviewer-x86", "http://overviewer.org/builds/win86_32-vxxx.zip" },
-            { "overviewer-x64", "http://overviewer.org/builds/win86_64-vxxx.zip" }
-        };
-
-        //Default versions
-        private static string strOverviewerVer = "0.10.0-8";
 
         //Checks for available updates
         public static void CheckUpdates(bool bolForce = false, bool bolManual = false)
@@ -71,18 +60,8 @@ namespace YAMS
                 //Dictionary<string, string> dicVers = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
                 JObject jVers = JObject.Parse(json);
 
-                string strBukkitServerURL = (string)jVers["bukkit"];
-                string strBukkitBetaServerURL = (string)jVers["bukkit-beta"];
-                string strBukkitDevServerURL = (string)jVers["bukkit-dev"];
-
                 //Reset all the JAR etags so we re-download them
-                if (bolForce)
-                {
-                    YAMS.Database.AddLog("Forced re-download of JAR files", "updater", "warn");
-                    YAMS.Database.SaveEtag(strMCServerURL, "");
-                    YAMS.Database.SaveEtag((string)jVers["pre"], "");
-                    YAMS.Database.SaveEtag(strBukkitServerURL, "");
-                }
+                if (bolForce) YAMS.Database.AddLog("Forced re-download of JAR files", "updater", "warn");
                 
                 //Check Minecraft server first
                 if (bolUpdateJAR || bolManual)
@@ -92,9 +71,17 @@ namespace YAMS
                     JObject mojangVers = JObject.Parse(jsonMojang);
                     string releaseVer = (string)mojangVers["latest"]["release"];
                     string snapshotVer = (string)mojangVers["latest"]["snapshot"];
+                    string strMCServerURL = "https://s3.amazonaws.com/Minecraft.Download/versions/" + releaseVer + "/minecraft_server." + releaseVer + ".jar";
+                    string strMCPreServerURL = "https://s3.amazonaws.com/Minecraft.Download/versions/" + snapshotVer + "/minecraft_server." + snapshotVer + ".jar";
 
-                    bolServerUpdateAvailable = UpdateIfNeeded("https://s3.amazonaws.com/Minecraft.Download/versions/" + releaseVer + "/minecraft_server." + releaseVer + ".jar", YAMS.Core.RootFolder + @"\lib\minecraft_server.jar.UPDATE");
-                    bolPreUpdateAvailable = UpdateIfNeeded("https://s3.amazonaws.com/Minecraft.Download/versions/" + snapshotVer + "/minecraft_server." + snapshotVer + ".jar", YAMS.Core.RootFolder + @"\lib\minecraft_server_pre.jar.UPDATE");
+                    if (bolForce)
+                    {
+                        YAMS.Database.SaveEtag(strMCServerURL, "");
+                        YAMS.Database.SaveEtag(strMCPreServerURL, "");
+                    }
+
+                    bolServerUpdateAvailable = UpdateIfNeeded(strMCServerURL, YAMS.Core.RootFolder + @"\lib\minecraft_server.jar.UPDATE");
+                    bolPreUpdateAvailable = UpdateIfNeeded(strMCPreServerURL, YAMS.Core.RootFolder + @"\lib\minecraft_server_pre.jar.UPDATE");
 
                     UpdateIfNeeded(strYPath + @"/properties.json", YAMS.Core.RootFolder + @"\lib\properties.json");
                 }
@@ -102,15 +89,36 @@ namespace YAMS
                 //Have they opted for bukkit? If so, update that too
                 if (Convert.ToBoolean(Database.GetSetting("BukkitInstalled", "YAMS")))
                 {
-                    bolBukkitUpdateAvailable = UpdateIfNeeded(strBukkitServerURL, Core.RootFolder + @"\lib\craftbukkit.jar.UPDATE", "modified");
+                    string strReleaseVersionFile = Util.GetTextHTTP("http://dl.bukkit.org/api/1.0/downloads/projects/craftbukkit/view/latest-rb/?_accept=application/json");
+                    if (strReleaseVersionFile != null)
+                    {
+                        JObject releaseVers = JObject.Parse(strReleaseVersionFile);
+                        string strBukkitServerURL = (string)releaseVers["file"]["url"];
+                        if (bolForce) YAMS.Database.SaveEtag(strBukkitServerURL, "");
+                        bolBukkitUpdateAvailable = UpdateIfNeeded(strBukkitServerURL, Core.RootFolder + @"\lib\craftbukkit.jar.UPDATE", "modified");
+                    }
                 }
                 if (Convert.ToBoolean(Database.GetSetting("BukkitBetaInstalled", "YAMS")))
                 {
-                    bolBukkitBetaUpdateAvailable = UpdateIfNeeded(strBukkitBetaServerURL, Core.RootFolder + @"\lib\craftbukkit-beta.jar.UPDATE", "modified");
+                    string strBetaVersionFile = Util.GetTextHTTP("http://dl.bukkit.org/api/1.0/downloads/projects/craftbukkit/view/latest-beta/?_accept=application/json");
+                    if (strBetaVersionFile != null)
+                    {
+                        JObject betaVers = JObject.Parse(strBetaVersionFile);
+                        string strBukkitBetaServerURL = (string)betaVers["file"]["url"];
+                        if (bolForce) YAMS.Database.SaveEtag(strBukkitBetaServerURL, "");
+                        bolBukkitBetaUpdateAvailable = UpdateIfNeeded(strBukkitBetaServerURL, Core.RootFolder + @"\lib\craftbukkit-beta.jar.UPDATE", "modified");
+                    }
                 }
                 if (Convert.ToBoolean(Database.GetSetting("BukkitDevInstalled", "YAMS")))
                 {
-                    bolBukkitDevUpdateAvailable = UpdateIfNeeded(strBukkitDevServerURL, Core.RootFolder + @"\lib\craftbukkit-dev.jar.UPDATE", "modified");
+                    string strDevVersionFile = Util.GetTextHTTP("http://dl.bukkit.org/api/1.0/downloads/projects/craftbukkit/view/latest-dev/?_accept=application/json");
+                    if (strDevVersionFile != null)
+                    {
+                        JObject devVers = JObject.Parse(strDevVersionFile);
+                        string strBukkitDevServerURL = (string)devVers["file"]["url"];
+                        if (bolForce) YAMS.Database.SaveEtag(strBukkitDevServerURL, "");
+                        bolBukkitDevUpdateAvailable = UpdateIfNeeded(strBukkitDevServerURL, Core.RootFolder + @"\lib\craftbukkit-dev.jar.UPDATE", "modified");
+                    }
                 }
 
                 //Now update self
@@ -136,15 +144,15 @@ namespace YAMS
                     //Update add-ons if they have elected to have them
                     //Update overviewer
                     if (Convert.ToBoolean(Database.GetSetting("OverviewerInstalled", "YAMS"))) {
-                        strOverviewerVer = (string)jVers["apps"]["overviewer"];
-                        if (UpdateIfNeeded(GetExternalURL("overviewer", strOverviewerVer), YAMS.Core.RootFolder + @"\apps\overviewer.zip"))
+                        string strOverviewerURL = (string)jVers["apps"]["overviewer-" + YAMS.Util.GetBitness()];
+                        if (UpdateIfNeeded(strOverviewerURL, YAMS.Core.RootFolder + @"\apps\overviewer.zip"))
                         {
                             bolOverviewerUpdateAvailable = true;
-                            if (!Directory.Exists(YAMS.Core.RootFolder + @"\apps\overviewer-" + strOverviewerVer + "\\")) Directory.CreateDirectory(YAMS.Core.RootFolder + @"\apps\overviewer-" + strOverviewerVer + "\\");
-                            ExtractZip(YAMS.Core.RootFolder + @"\apps\overviewer.zip", YAMS.Core.RootFolder + @"\apps\overviewer-" + strOverviewerVer + "\\");
+                            if (!Directory.Exists(YAMS.Core.RootFolder + @"\apps\overviewer-new\\")) Directory.CreateDirectory(YAMS.Core.RootFolder + @"\apps\overviewer-new\\");
+                            ExtractZip(YAMS.Core.RootFolder + @"\apps\overviewer.zip", YAMS.Core.RootFolder + @"\apps\overviewer-new\\");
                             File.Delete(YAMS.Core.RootFolder + @"\apps\overviewer.zip");
                             if (Directory.Exists(YAMS.Core.RootFolder + @"\apps\overviewer\")) Directory.Delete(YAMS.Core.RootFolder + @"\apps\overviewer\", true);
-                            Directory.Move(YAMS.Core.RootFolder + @"\apps\overviewer-" + strOverviewerVer, YAMS.Core.RootFolder + @"\apps\overviewer");
+                            Directory.Move(YAMS.Core.RootFolder + @"\apps\overviewer-new", YAMS.Core.RootFolder + @"\apps\overviewer");
                         }
                     }
                 }
@@ -233,24 +241,6 @@ namespace YAMS
                 }
             }
 
-        }
-
-        //Swaps out the version number from the third party URLs where needed
-        public static string GetExternalURL(string strApp, string strVersion)
-        {
-            var strReturn = "";
-            switch (strApp)
-            {
-                case "c10t":
-                case "overviewer":
-                    strReturn = dicAddOnURLS[strApp + "-" + YAMS.Util.GetBitness()];
-                    break;
-                default:
-                    strReturn = dicAddOnURLS[strApp];
-                    break;
-            }
-            strReturn = strReturn.Replace("xxx", strVersion);
-            return strReturn;
         }
 
         public static bool UpdateIfNeeded(string strURL, string strFile, string strType = "etag")
