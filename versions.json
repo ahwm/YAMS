@@ -1,24 +1,31 @@
 {
   "libs":
-    {
-      "ExceptionManager.dll": "1.1.4217.22967",
-      "HttpServer.dll": "2.0.0.0",
-      "ICSharpCode.SharpZipLib.dll": "0.86.0.518",
-	  "Interop.NATUPNPLib.dll":"1.0.0.0",
-	  "Interop.NETCONLib.dll":"1.0.0.0",
-	  "Interop.NetFwTypeLib.dll":"1.0.0.0",
-	  "LibNbt.dll" : "0.2.0.0"
-    },
+  {
+    "ExceptionManager.dll": "1.1.4217.22967",
+    "HttpServer.dll": "2.0.0.0",
+    "ICSharpCode.SharpZipLib.dll": "0.86.0.518",
+    "Interop.NATUPNPLib.dll":"1.0.0.0",
+    "Interop.NETCONLib.dll":"1.0.0.0",
+    "Interop.NetFwTypeLib.dll":"1.0.0.0",
+    "LibNbt.dll" : "0.2.0.0"
+  },
   "apps":
-    {
-      "overviewer" : "0.10.0-8-gdd6538b",
-      "c10t" : "1.9",
-      "biomeextractor": "090",
-      "tectonicus":"1.38"
-    },
+  {
+    "overviewer" : "0.10.0-8-gdd6538b",
+    "c10t" : "1.9",
+    "biomeextractor": "090",
+    "tectonicus":"1.38",
+    "overviewer-x86" : "http://overviewer.org/builds/157/overviewer-0.10.70-win32.59-2d44e82.zip",
+    "overviewer-x64" : "http://overviewer.org/builds/156/overviewer-0.10.70-win64.46-2d44e82.zip"
+  },
+  "bukkit" : {
+    "release": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
+    "beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
+    "dev": "http://dl.bukkit.org/latest-dev/craftbukkit-dev.jar"    
+  },
   "pre": "https://s3.amazonaws.com/Minecraft.Download/versions/13w25c/minecraft_server.13w25c.jar",
   "pre-client": "https://s3.amazonaws.com/Minecraft.Download/launcher/MinecraftDev.exe",
-	"bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
-	"bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
+  "bukkit": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
+  "bukkit-beta": "http://dl.bukkit.org/latest-beta/craftbukkit-beta.jar",
   "bukkit-dev": "http://dl.bukkit.org/latest-dev/craftbukkit-dev.jar"
 }
