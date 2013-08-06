@@ -422,6 +422,7 @@ namespace YAMS
                     goto case 8;
                 case 8:
                     Database.ExecuteSQL("ALTER TABLE MCServers ADD COLUMN ServerCustomJAR ntext");
+                    Database.ExecuteSQL("ALTER TABLE MCServers ADD COLUMN ServerWebBody ntext");
                     Database.SaveSetting("DBSchema", "9");
                     goto case 9;
                 case 9:

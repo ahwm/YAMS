@@ -146,7 +146,7 @@ namespace YAMS.Web
                     dicTags.Add("ServerConnectAddress", strConnectAddress); //TODO
                     dicTags.Add("ClientURL", strClientURL);
                     dicTags.Add("PlayersOnline", strPlayers);
-                    dicTags.Add("PageBody", "Some blurb about the server, probably including some <em>HTML</em>");
+                    dicTags.Add("PageBody", Database.GetSetting(intServerID, "ServerWebBody").ToString());
                 }
                 else if (regServerAPI.Match(context.Request.Uri.AbsolutePath).Success)
                 {

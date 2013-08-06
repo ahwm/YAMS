@@ -209,9 +209,30 @@ YAMS.admin = {
                         if (results.publicport != 80) strPublic += ":" + results.publicport;
                         strPublic += "/servers/" + YAMS.admin.selectedServer + "/";
                         $('#public-website').html('<a href="' + strPublic + '" target="_blank">' + strPublic + '</a>');
+
+                        $('#website-message').html(results.message);
+
+                        tinymce.init({
+                            selector: '#website-message',
+                            height: 300,
+                            plugins: [
+                                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                                     "save table contextmenu directionality emoticons template paste textcolor"
+                               ],
+                            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons"
+   
+                        });
                     }
                 });
             }
+        });
+    },
+
+    savePublicWebSettings: function (e) {
+        tinymce.editors["website-message"].save();
+        $.ajax({
+            data: 'serverid=' + YAMS.admin.selectedServer + '&action=save-website-settings&message=' + $('#website-message').val()
         });
     },
 
