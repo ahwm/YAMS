@@ -191,6 +191,7 @@ namespace YAMS.Web
                                               "\"memory\" : \"" + Database.GetSetting(intServerID, "ServerAssignedMemory") + "\"," +
                                               "\"autostart\" : \"" + Database.GetSetting(intServerID, "ServerAutoStart") + "\"," +
                                               "\"type\" : \"" + Database.GetSetting(intServerID, "ServerType") + "\"," +
+                                              "\"custom\" : \"" + Database.GetSetting(intServerID, "ServerCustomJAR").ToString().Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"," +
                                               "\"motd\" : \"" + Database.GetSetting("motd", "MC", intServerID) + "\"," +
                                               "\"listen\" : \"" + Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].GetProperty("server-ip") + "\"," +
                                               "\"port\" : \"" + Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].GetProperty("server-port") + "\"," +
@@ -267,6 +268,7 @@ namespace YAMS.Web
                             intServerID = Convert.ToInt32(param["serverid"]);
                             Database.UpdateServer(intServerID, "ServerTitle", param["title"]);
                             Database.UpdateServer(intServerID, "ServerType", param["type"]);
+                            Database.UpdateServer(intServerID, "ServerCustomJAR", param["custom"]);
                             Database.UpdateServer(intServerID, "ServerAssignedMemory", Convert.ToInt32(param["memory"]));
                             if (param["optimisations"] == "true") Database.UpdateServer(intServerID, "ServerEnableOptimisations", true);
                             else Database.UpdateServer(intServerID, "ServerEnableOptimisations", false);

@@ -146,6 +146,9 @@ namespace YAMS
                 case "pre":
                     strFile = "minecraft_server_pre.jar";
                     break;
+                case "custom":
+                    strFile = Convert.ToString(Database.GetSetting(this.ServerID, "ServerCustomJAR"));
+                    break;
                 default:
                     strFile = "minecraft_server.jar";
                     break;
@@ -184,15 +187,22 @@ namespace YAMS
                     }
 
                     //Some specials for bukkit
-                    if (this.ServerType == "bukkit" || this.ServerType == "bukkit-beta" || this.ServerType == "bukkit-dev")
+                    if (this.ServerType == "bukkit" || this.ServerType == "bukkit-beta" || this.ServerType == "bukkit-dev" || this.ServerType == "custom")
                     {
                         strArgs += " -Djline.terminal=jline.UnsupportedTerminal";
                     }
 
                     //Basic arguments in all circumstances
-                    strArgs += " -Xmx" + intAssignedMem + "M -Xms" + intAssignedMem + @"M -jar " + "\"" + Core.RootFolder + "\\lib\\";
-                    strArgs += strFile;
-                    strArgs += "\" nogui";
+                    strArgs += " -Xmx" + intAssignedMem + "M -Xms" + intAssignedMem + @"M -jar ";
+                    if (this.ServerType == "custom")
+                    {
+                        strArgs += strFile;
+                    }
+                    else
+                    {
+                        strArgs += "\"" + Core.RootFolder + "\\lib\\" + strFile + "\"";
+                    }
+                    strArgs += " nogui";
                 }
 
                 this.prcMinecraft.StartInfo.UseShellExecute = false;

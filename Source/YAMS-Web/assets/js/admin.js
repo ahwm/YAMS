@@ -230,6 +230,15 @@ YAMS.admin = {
                         for (var i = 0, len = typeSelect.options.length; i < len; i++) {
                             if (typeSelect.options[i].value === results.type) typeSelect.options[i].selected = true;
                         }
+                        $('#cfg_type').on('change', function (e) {
+                            if ($(this).val() == "custom") {
+                                $('#custom-jar').show();
+                            } else {
+                                $('#custom-jar').hide();
+                            }
+                        });
+                        $('#cfg_type').trigger('change');
+                        $('#cfg_custom').val(results.custom);
                         $('#cfg_motd').val(results.motd);
                         $('#cfg_port').val(results.port);
 
