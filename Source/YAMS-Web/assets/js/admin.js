@@ -202,6 +202,9 @@ YAMS.admin = {
                         var strMCConnection = strPrefix;
                         if (results.mcport != 25565) strMCConnection += ":" + results.mcport;
                         $('#minecraft-name').val(strMCConnection);
+                        var strInternalMC = results.internalip;
+                        if (results.mcport != 25565) strInternalMC += ":" + results.mcport;
+                        $('#internal-name').val(strInternalMC);
                         var strPublic = "http://" + strPrefix;
                         if (results.publicport != 80) strPublic += ":" + results.publicport;
                         strPublic += "/servers/" + YAMS.admin.selectedServer + "/";

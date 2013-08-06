@@ -202,6 +202,7 @@ namespace YAMS.Web
                             intServerID = Convert.ToInt32(param["serverid"]);
                             strResponse = "{ \"dnsname\" : \"" + Database.GetSetting("DNSName", "YAMS") + "\", " +
                                             "\"externalip\" : \"" + Networking.GetExternalIP().ToString() + "\", " +
+                                            "\"internalip\" : \"" + Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].GetProperty("server-ip") + "\", " +
                                             "\"mcport\" : " + Core.Servers[Convert.ToInt32(context.Request.Parameters["serverid"])].GetProperty("server-port") + ", " +
                                             "\"publicport\" : " + Database.GetSetting("PublicListenPort", "YAMS") + " }";
                             break;
