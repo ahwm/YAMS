@@ -15,8 +15,8 @@
     "c10t" : "1.9",
     "biomeextractor": "090",
     "tectonicus":"1.38",
-    "overviewer-x86" : "http://overviewer.org/builds/157/overviewer-0.10.70-win32.59-2d44e82.zip",
-    "overviewer-x64" : "http://overviewer.org/builds/156/overviewer-0.10.70-win64.46-2d44e82.zip"
+    "overviewer-x86" : "http://overviewer.org/builds/168/overviewer-0.10.73-win32.61-97ffd32.zip",
+    "overviewer-x64" : "http://overviewer.org/builds/167/overviewer-0.10.73-win64.48-97ffd32.zip"
   },
   "bukkit" : {
     "release": "http://dl.bukkit.org/latest-rb/craftbukkit.jar",
