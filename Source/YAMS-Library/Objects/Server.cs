@@ -101,8 +101,16 @@ namespace YAMS
 
         public string GetProperty(string strPropertyName)
         {
-            IniParser parser = new IniParser(this.ServerDirectory + @"\server.properties");
-            return parser.GetSetting("ROOT", strPropertyName);
+            try
+            {
+                IniParser parser = new IniParser(this.ServerDirectory + @"\server.properties");
+                return parser.GetSetting("ROOT", strPropertyName);
+            }
+            catch (Exception e)
+            {
+                Database.AddLog("Cannot get property \"" + strPropertyName + "\" for server " + this.ServerTitle, "server", "error", false, this.ServerID);
+                return "";
+            }
         }
 
         public void SaveProperty(string strPropertyName, string strPropertyValue)
