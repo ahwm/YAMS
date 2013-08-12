@@ -50,6 +50,8 @@ namespace YAMS
         {
             if (!UpdatePaused)
             {
+                Database.AddLog("Starting update check", "updater");
+                
                 //What branch are we on?
                 string strBranch = Database.GetSetting("UpdateBranch", "YAMS");
                 string strYPath = strYAMSUpdatePath[strBranch];
@@ -190,6 +192,8 @@ namespace YAMS
                         }
                     }
                 }
+
+                Database.AddLog("Finished update check", "updater");
             }
             else
             {
@@ -274,6 +278,8 @@ namespace YAMS
 
                 //Grab the response
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                Database.AddLog("Downloading " + strFile, "updater");
 
                 //Stream the file
                 Stream strm = response.GetResponseStream();
