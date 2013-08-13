@@ -32,7 +32,7 @@ namespace YAMS
         /// Grab the external IP address using icanhazip.com
         /// </summary>
         /// <returns>IPAddress</returns>
-        public static IPAddress GetExternalIP(string strUrl = "http://icanhazip.com/")
+        public static IPAddress GetExternalIP(string strUrl = "http://ipv4.icanhazip.com/")
         {
             string strExternalIPChecker = strUrl;
             WebClient wcGetIP = new WebClient();
