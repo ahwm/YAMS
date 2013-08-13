@@ -202,13 +202,37 @@ YAMS.admin = {
                         var strMCConnection = strPrefix;
                         if (results.mcport != 25565) strMCConnection += ":" + results.mcport;
                         $('#minecraft-name').val(strMCConnection);
+                        var strInternalMC = results.internalip;
+                        if (results.mcport != 25565) strInternalMC += ":" + results.mcport;
+                        $('#internal-name').val(strInternalMC);
                         var strPublic = "http://" + strPrefix;
                         if (results.publicport != 80) strPublic += ":" + results.publicport;
                         strPublic += "/servers/" + YAMS.admin.selectedServer + "/";
                         $('#public-website').html('<a href="' + strPublic + '" target="_blank">' + strPublic + '</a>');
+
+                        $('#website-message').html(results.message);
+
+                        tinymce.init({
+                            selector: '#website-message',
+                            height: 300,
+                            plugins: [
+                                     "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                                     "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                                     "save table contextmenu directionality emoticons template paste textcolor"
+                               ],
+                            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor emoticons"
+   
+                        });
                     }
                 });
             }
+        });
+    },
+
+    savePublicWebSettings: function (e) {
+        tinymce.editors["website-message"].save();
+        $.ajax({
+            data: 'serverid=' + YAMS.admin.selectedServer + '&action=save-website-settings&message=' + $('#website-message').val()
         });
     },
 
@@ -230,6 +254,15 @@ YAMS.admin = {
                         for (var i = 0, len = typeSelect.options.length; i < len; i++) {
                             if (typeSelect.options[i].value === results.type) typeSelect.options[i].selected = true;
                         }
+                        $('#cfg_type').on('change', function (e) {
+                            if ($(this).val() == "custom") {
+                                $('#custom-jar').show();
+                            } else {
+                                $('#custom-jar').hide();
+                            }
+                        });
+                        $('#cfg_type').trigger('change');
+                        $('#cfg_custom').val(results.custom);
                         $('#cfg_motd').val(results.motd);
                         $('#cfg_port').val(results.port);
 
@@ -407,6 +440,11 @@ YAMS.admin = {
     restartServerWhenFree: function () {
         $.ajax({
             data: 'action=restart-when-free&serverid=' + YAMS.admin.selectedServer
+        });
+    },
+    restartServer: function () {
+        $.ajax({
+            data: 'action=restart&serverid=' + YAMS.admin.selectedServer
         });
     },
     deleteWorld: function (bolRandomSeed) {

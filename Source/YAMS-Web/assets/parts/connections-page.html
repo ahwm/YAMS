@@ -1,5 +1,11 @@
 ﻿<fieldset id="server-connections">
     <legend>Server Connections</legend>
-    <p><label for="minecraft-name">External Minecraft Connection:</label><input type="text" id="minecraft-name" name="title" readonly="readonly" /> (use IP address in Settings tab internally)</p>
-    <p><label for="public-website">Public Website:</label><span class="text" id="public-website"></span></p>
+    <p><label for="minecraft-name"><strong>External</strong> Minecraft Connection:</label><input type="text" id="minecraft-name" name="title" readonly="readonly" /> (For players outside of your house/network)</p>
+    <p><label for="internal-name"><strong>Internal</strong> Minecraft Connection:</label><input type="text" id="internal-name" name="title" readonly="readonly" /> (For anyone on the same network as the server)</p>
+</fieldset>
+<fieldset id="public-website-set">
+    <legend>Public Website</legend>
+    <p><label for="public-website">Public Website Address:</label><span class="text" id="public-website"></span></p>
+    <p><textarea id="website-message"></textarea></p>
+    <button onclick="YAMS.admin.savePublicWebSettings(); return false;">Save</button>
 </fieldset>
