@@ -105,7 +105,7 @@ namespace YAMS_Remover
                     }
 
                     Console.WriteLine("Checking Registry...");
-                    string keyName = @"SYSTEM\ControlSet001\Services";
+                    string keyName = @"SYSTEM\CurrentControlSet\Services";
                     using (RegistryKey key = Registry.LocalMachine.OpenSubKey(keyName, true))
                     {
                         try
@@ -129,7 +129,7 @@ namespace YAMS_Remover
                 strResponse = Console.ReadLine();
                 if (strResponse.ToUpper().Equals("Y"))
                 {
-
+                    //SYSTEM\CurrentControlSet\Services\YAMS_Service\ImagePath
                 }
 
                 Console.WriteLine("Remove add/remove programs entry? (y/n)");
