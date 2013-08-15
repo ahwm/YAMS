@@ -33,6 +33,9 @@ namespace YAMS
         public static bool bolBukkitBetaUpdateAvailable = false;
         public static bool bolBukkitDevUpdateAvailable = false;
         public static bool bolLibUpdateAvailable = false;
+        public static bool bolReporterUpdateAvailable = false;
+        public static bool bolReporterConfigUpdateAvailable = false;
+
 
         //Minecraft URLs
         public static string strMCClientURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar";
@@ -133,6 +136,8 @@ namespace YAMS
                     }
                     bolWebUpdateAvailable = UpdateIfNeeded(strYPath + @"/web.zip", YAMS.Core.RootFolder + @"\web.zip");
                     bolGUIUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Updater.exe", YAMS.Core.RootFolder + @"\YAMS-Updater.exe");
+                    bolReporterUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Reporter.exe", YAMS.Core.RootFolder + @"\YAMS-Reporter.exe");
+                    bolReporterConfigUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Reporter.exe.config", YAMS.Core.RootFolder + @"\YAMS-Reporter.exe.config");
 
                     //Update External libs
                     foreach (JProperty j in jVers["libs"])
