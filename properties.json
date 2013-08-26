@@ -110,7 +110,7 @@
     "description":"What commands OP users can use, see http://www.minecraftwiki.net/wiki/Server.properties",
       "min": "1",
       "max": "4",
-    "name":"Spawn Protection" },
+    "name":"OP Permission Level" },
 
   { "key":"hardcore",
     "type":"boolean",
