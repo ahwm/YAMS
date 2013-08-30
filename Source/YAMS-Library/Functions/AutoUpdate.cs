@@ -262,6 +262,7 @@ namespace YAMS
             {
                 //Set up a request and include our eTag
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(strURL);
+                request.UserAgent = "YAMS Downloader (http://yams.in)";
                 request.Method = "GET";
                 if (strETag != "")
                 {
