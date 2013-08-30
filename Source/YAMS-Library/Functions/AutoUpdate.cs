@@ -152,7 +152,7 @@ namespace YAMS
                     //Update overviewer
                     if (Convert.ToBoolean(Database.GetSetting("OverviewerInstalled", "YAMS"))) {
                         string strOverviewerURL = (string)jVers["apps"]["overviewer-" + YAMS.Util.GetBitness()];
-                        if (UpdateIfNeeded(strOverviewerURL, YAMS.Core.RootFolder + @"\apps\overviewer.zip"))
+                        if (UpdateIfNeeded(strOverviewerURL, YAMS.Core.RootFolder + @"\apps\overviewer.zip", "modified"))
                         {
                             bolOverviewerUpdateAvailable = true;
                             if (!Directory.Exists(YAMS.Core.RootFolder + @"\apps\overviewer-new\\")) Directory.CreateDirectory(YAMS.Core.RootFolder + @"\apps\overviewer-new\\");
