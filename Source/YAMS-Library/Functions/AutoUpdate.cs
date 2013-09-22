@@ -95,7 +95,7 @@ namespace YAMS
                     if (strReleaseVersionFile != null)
                     {
                         JObject releaseVers = JObject.Parse(strReleaseVersionFile);
-                        string strBukkitServerURL = (string)releaseVers["file"]["url"];
+                        string strBukkitServerURL = @"http://dl.bukkit.org" + (string)releaseVers["file"]["url"];
                         if (bolForce) YAMS.Database.SaveEtag(strBukkitServerURL, "");
                         bolBukkitUpdateAvailable = UpdateIfNeeded(strBukkitServerURL, Core.RootFolder + @"\lib\craftbukkit.jar.UPDATE", "modified");
                     }
@@ -106,7 +106,7 @@ namespace YAMS
                     if (strBetaVersionFile != null)
                     {
                         JObject betaVers = JObject.Parse(strBetaVersionFile);
-                        string strBukkitBetaServerURL = (string)betaVers["file"]["url"];
+                        string strBukkitBetaServerURL = @"http://dl.bukkit.org" + (string)betaVers["file"]["url"];
                         if (bolForce) YAMS.Database.SaveEtag(strBukkitBetaServerURL, "");
                         bolBukkitBetaUpdateAvailable = UpdateIfNeeded(strBukkitBetaServerURL, Core.RootFolder + @"\lib\craftbukkit-beta.jar.UPDATE", "modified");
                     }
@@ -117,7 +117,7 @@ namespace YAMS
                     if (strDevVersionFile != null)
                     {
                         JObject devVers = JObject.Parse(strDevVersionFile);
-                        string strBukkitDevServerURL = (string)devVers["file"]["url"];
+                        string strBukkitDevServerURL = @"http://dl.bukkit.org" + (string)devVers["file"]["url"];
                         if (bolForce) YAMS.Database.SaveEtag(strBukkitDevServerURL, "");
                         bolBukkitDevUpdateAvailable = UpdateIfNeeded(strBukkitDevServerURL, Core.RootFolder + @"\lib\craftbukkit-dev.jar.UPDATE", "modified");
                     }
