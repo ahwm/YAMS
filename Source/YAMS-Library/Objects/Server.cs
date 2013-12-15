@@ -73,6 +73,9 @@ namespace YAMS
             this.ListenIP = this.GetProperty("server-ip");
             this.Port = Convert.ToInt32(this.GetProperty("server-port"));
 
+            if (this.Port == null) this.Port = 25565;
+            if (this.ListenIP == null) this.ListenIP = "*";
+
             //There is a bug in <0.3.2 that causes double worlds, detect and correct
             if (this.GetProperty("level-name") == @"..\\world")
             {
@@ -109,7 +112,7 @@ namespace YAMS
             catch (Exception e)
             {
                 Database.AddLog("Cannot get property \"" + strPropertyName + "\" for server " + this.ServerTitle, "server", "error", false, this.ServerID);
-                return "";
+                return null;
             }
         }
 
