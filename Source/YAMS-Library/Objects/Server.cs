@@ -17,8 +17,8 @@ namespace YAMS
         public string ServerDirectory;
 
         private Regex regRemoveDateStamp = new Regex(@"^([0-9]+\-[0-9]+\-[0-9]+ )");
-        private Regex regRemoveTimeStamp = new Regex(@"^([0-9]+:[0-9]+:[0-9]+ )");
-        private Regex regErrorLevel = new Regex(@"^\[([A-Z]+)\]{1}");
+        private Regex regRemoveTimeStamp = new Regex(@"^\[([0-9]+:[0-9]+:[0-9]+\] )");
+        private Regex regErrorLevel = new Regex(@"^\[([\w\s\#]+)/([A-Z]+)\]: {1}");
         private Regex regPlayerChat = new Regex(@"^(\<([\w-~])+\>){1}");
         private Regex regConsoleChat = new Regex(@"^(\[CONSOLE\]|\[Server\]|\<\*Console\>){1}");
         private Regex regPlayerPM = new Regex(@"^(\[([\w])+\-\>(\w)+\]){1}");
@@ -226,7 +226,7 @@ namespace YAMS
                 this.prcMinecraft.StartInfo.WorkingDirectory = this.strWorkingDir;
 
                 //Set up events
-                this.prcMinecraft.OutputDataReceived += new DataReceivedEventHandler(ServerOutput);
+                this.prcMinecraft.OutputDataReceived += new DataReceivedEventHandler(ServerError);
                 this.prcMinecraft.ErrorDataReceived += new DataReceivedEventHandler(ServerError);
                 this.prcMinecraft.EnableRaisingEvents = true;
                 this.prcMinecraft.Exited += new EventHandler(ServerExited);
@@ -405,7 +405,7 @@ namespace YAMS
 
             if (regMatch.Success)
             {
-                switch (regMatch.Groups[1].Value)
+                switch (regMatch.Groups[2].Value)
                 {
                     case "INFO":
                         //Check if it's player chat
