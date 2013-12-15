@@ -33,6 +33,9 @@ namespace YAMS
         public static bool bolBukkitBetaUpdateAvailable = false;
         public static bool bolBukkitDevUpdateAvailable = false;
         public static bool bolLibUpdateAvailable = false;
+        public static bool bolReporterUpdateAvailable = false;
+        public static bool bolReporterConfigUpdateAvailable = false;
+
 
         //Minecraft URLs
         public static string strMCClientURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar";
@@ -133,6 +136,8 @@ namespace YAMS
                     }
                     bolWebUpdateAvailable = UpdateIfNeeded(strYPath + @"/web.zip", YAMS.Core.RootFolder + @"\web.zip");
                     bolGUIUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Updater.exe", YAMS.Core.RootFolder + @"\YAMS-Updater.exe");
+                    bolReporterUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Reporter.exe", YAMS.Core.RootFolder + @"\YAMS-Reporter.exe");
+                    bolReporterConfigUpdateAvailable = UpdateIfNeeded(strYPath + @"/YAMS-Reporter.exe.config", YAMS.Core.RootFolder + @"\YAMS-Reporter.exe.config");
 
                     //Update External libs
                     foreach (JProperty j in jVers["libs"])
@@ -147,7 +152,7 @@ namespace YAMS
                     //Update overviewer
                     if (Convert.ToBoolean(Database.GetSetting("OverviewerInstalled", "YAMS"))) {
                         string strOverviewerURL = (string)jVers["apps"]["overviewer-" + YAMS.Util.GetBitness()];
-                        if (UpdateIfNeeded(strOverviewerURL, YAMS.Core.RootFolder + @"\apps\overviewer.zip"))
+                        if (UpdateIfNeeded(strOverviewerURL, YAMS.Core.RootFolder + @"\apps\overviewer.zip", "modified"))
                         {
                             bolOverviewerUpdateAvailable = true;
                             if (!Directory.Exists(YAMS.Core.RootFolder + @"\apps\overviewer-new\\")) Directory.CreateDirectory(YAMS.Core.RootFolder + @"\apps\overviewer-new\\");
@@ -257,6 +262,7 @@ namespace YAMS
             {
                 //Set up a request and include our eTag
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(strURL);
+                request.UserAgent = "YAMS Downloader (http://yams.in)";
                 request.Method = "GET";
                 if (strETag != "")
                 {
