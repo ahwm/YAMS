@@ -138,7 +138,7 @@
 
   { "key":"level-type",
     "type":"array",
-    "values": "DEFAULT|Normal,FLAT|Flat,LARGEBIOMES|Large Biomes",
+    "values": "DEFAULT|Normal,FLAT|Flat,LARGEBIOMES|Large Biomes,AMPLIFIED|Amplified",
     "default": "DEFAULT",
     "description":"Type of world generation",
     "name":"Level Type" },
