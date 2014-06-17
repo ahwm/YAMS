@@ -44,8 +44,8 @@ namespace YAMS
         //YAMS URLs
         public static Dictionary<string, string> strYAMSUpdatePath = new Dictionary<string, string>()
         {
-            { "live", "https://github.com/richardbenson/YAMS/raw/updater"},
-            { "dev", "https://github.com/richardbenson/YAMS/raw/updater/development" }
+            { "live", "https://s3-eu-west-1.amazonaws.com/yams-dl"},
+            { "dev", "https://s3-eu-west-1.amazonaws.com/yams-dl/development" }
         };
 
         //Checks for available updates
