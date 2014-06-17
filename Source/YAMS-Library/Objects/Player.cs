@@ -40,7 +40,7 @@ namespace YAMS
             }
 
             //check the op list
-            if (Util.SearchFile(s.ServerDirectory + "ops.txt", strName)) this.Level = "op";
+            //if (Util.SearchFile(s.ServerDirectory + "ops.txt", strName)) this.Level = "op";
 
             //Emulate MOTD
             if (Database.GetSetting("motd", "MC", this.Server.ServerID) != "") this.SendMessage(Database.GetSetting("motd", "MC", this.Server.ServerID));
@@ -53,12 +53,12 @@ namespace YAMS
 
         private void UpdatePosition()
         {
-            NbtFile PlayerDat = new NbtFile(this.Server.ServerDirectory + "\\world\\players\\" + this.Username + ".dat");
+            /*NbtFile PlayerDat = new NbtFile(this.Server.ServerDirectory + "\\world\\players\\" + this.Username + ".dat");
             PlayerDat.LoadFile();
             this._position.x = PlayerDat.Query<LibNbt.Tags.NbtDouble>("//Pos/0").Value;
             this._position.y = PlayerDat.Query<LibNbt.Tags.NbtDouble>("//Pos/1").Value;
             this._position.z = PlayerDat.Query<LibNbt.Tags.NbtDouble>("//Pos/2").Value;
-            PlayerDat.Dispose();
+            PlayerDat.Dispose();*/
         }
 
     }
