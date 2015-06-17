@@ -70,14 +70,30 @@ namespace YAMS
         }
 
         /// <summary>
+        /// Looks for a working Minecraft client in any given root folder. Useful for custom paths.
+        /// This works only with the vanilla launcher.
+        /// </summary>
+        /// <param name="root">the path to the .minecraft folder</param>
+        /// <returns>boolean indicating if the minecraft client is in the specified folder</returns>
+        public static bool HasMCClient(string root)
+        {
+            //minecraft.jar is deprecated, but possibly working
+            if (File.Exists(Path.Combine(root, @"bin\minecraft.jar"))) return true;
+
+            //If there is a versions folder, assume that there is a jar file in one of the folders.
+            if (Directory.Exists(Path.Combine(root, @"versions\")) && Directory.GetDirectories(Path.Combine(root, @"versions\")).Length != 0) return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Looks for the Minecraft client in the system user's profile, the service runs as LOCAL SYSTEM, so for
         /// some of the third party apps we need to see if it is in this profile too
         /// </summary>
         /// <returns>boolean indicating if the minecraft client is in the SYSTEM account's AppData</returns>
         public static bool HasMCClientSystem()
         {
-            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"config\systemprofile\AppData\Roaming\.minecraft\bin\minecraft.jar"))) return true;
-            else return false;
+            return HasMCClient(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"config\systemprofile\AppData\Roaming\.minecraft\"));
         }
         /// <summary>
         /// Checks if the Minecraft client is installed locally
@@ -85,8 +101,7 @@ namespace YAMS
         /// <returns>boolean indicating if the Minecraft jar is in the local user's AppData</returns>
         public static bool HasMCClientLocal()
         {
-            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @".minecraft\bin\minecraft.jar"))) return true;
-            else return false;
+            return HasMCClient(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @".minecraft\"));
         }
         public static void CopyMCClient()
         {

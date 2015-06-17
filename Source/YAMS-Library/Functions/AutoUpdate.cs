@@ -39,6 +39,7 @@ namespace YAMS
 
         //Minecraft URLs
         public static string strMCClientURL = "https://s3.amazonaws.com/MinecraftDownload/launcher/minecraft.jar";
+        public static string strMCServerURL;
         public static string strMCVersionFile = "https://s3.amazonaws.com/Minecraft.Download/versions/versions.json";
 
         //YAMS URLs
@@ -76,7 +77,7 @@ namespace YAMS
                     JObject mojangVers = JObject.Parse(jsonMojang);
                     string releaseVer = (string)mojangVers["latest"]["release"];
                     string snapshotVer = (string)mojangVers["latest"]["snapshot"];
-                    string strMCServerURL = "https://s3.amazonaws.com/Minecraft.Download/versions/" + releaseVer + "/minecraft_server." + releaseVer + ".jar";
+                    strMCServerURL = "https://s3.amazonaws.com/Minecraft.Download/versions/" + releaseVer + "/minecraft_server." + releaseVer + ".jar";
                     string strMCPreServerURL = "https://s3.amazonaws.com/Minecraft.Download/versions/" + snapshotVer + "/minecraft_server." + snapshotVer + ".jar";
 
                     if (bolForce)
